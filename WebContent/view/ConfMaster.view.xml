@@ -1,0 +1,230 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:form="sap.ui.layout.form"
+	xmlns:f="sap.ui.layout.form" xmlns:ca="sap.ca.ui" controllerName="ZSRV_RPA_FSE.view.ConfMaster"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="sapUiFioriObjectPage" title="Add Confirmation"
+		showNavButton="true" navButtonPress="handleNavButtonPress">
+		<content>
+			<!-- <List id="list" items="{/Data/results}" mode="{device>/listMode}" 
+				select="handleSelect" growing="true" growingScrollToLoad="true"> <items> 
+				<ObjectListItem id="MAIN_LIST_ITEM" type="Active" title="{Description}" number="{ContactPerson}" 
+				numberUnit = "{Telephone}" press="handleSelect"> <attributes> <ObjectAttribute 
+				id="customerName" text="{CustomerName} " /> </attributes> <firstStatus> <ObjectStatus 
+				id="customerCity" text="{City} " /> </firstStatus> </ObjectListItem> </items> 
+				</List> <l:Grid class="gridMarginTop" defaultSpan="L6 M8 S10"> <l:content> 
+				<Label text="Description"> </Label> <Input value=" " description="" width="300px" 
+				/> <Label text="Type" /> <Input value=" " description="" width="300px" fieldWidth="75%" 
+				/> <Label text="Profile" /> <Input value=" " description="" width="300px" 
+				fieldWidth="75%" /> <Label text="Category1" /> <ComboBox> <core:Item key="{ProductId}" 
+				text="{Name}" /> </ComboBox> <Label text="Category2" /> <ComboBox> <core:Item 
+				key="{ProductId}" text="{Name}" /> </ComboBox> <Label text="Category3" /> 
+				<ComboBox> <core:Item key="{ProductId}" text="{Name}" /> </ComboBox> <Label 
+				text="Category4" /> <ComboBox> <core:Item key="{ProductId}" text="{Name}" 
+				/> </ComboBox> </l:content> </l:Grid> -->
+			<Panel expandable="true" expanded="true" headerText="Header Details">
+				<content>
+					<f:Form id="FormChange354" minWidth="1024" maxContainerCols="2"
+						editable="true">
+						<f:title>
+							<core:Title text="Header Details" />
+						</f:title>
+						<f:layout>
+							<f:ResponsiveGridLayout labelSpanL="3"
+								labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1"
+								columnsM="1" />
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Description">
+										<f:fields>
+											<Input id="desc" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Type">
+										<f:fields>
+											<Input id="type" value="GSS Confirmation" enabled="false" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Profile">
+										<f:fields>
+											<Input id="profile" value= "ZCSPROB" enabled="false" />
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Category1">
+										<f:fields>
+											<Select width="100%" id="category1" items="{ path : '/datacat'}"
+												change="onSelectCat">
+												<items>
+													<core:Item text="{CatDesc}" key="{CatId}" />
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Category2">
+										<f:fields>
+											<Select width="100%" id="category2" items="{ path : '/datacat2'}"
+												change="onSelectCat2">
+												<items>
+													<core:Item text="{CatDesc}" key="{CatId}" />
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Category3">
+										<f:fields>
+											<Select width="100%" id="category3" selectedKey="{Category3}">
+												<items>
+													<core:Item text=" " key="HSI" />
+													<core:Item text="Problem" key="Problem" />
+													<core:Item text="Action Codes" key="ActionCodes" />
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Category4">
+										<f:fields>
+											<Select width="100%" id="category4" selectedKey="{Category4}">
+												<items>
+													<core:Item text=" " key="HSI" />
+													<core:Item text="Problem" key="Problem" />
+													<core:Item text="Action Codes" key="ActionCodes" />
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									
+									<f:FormElement label="Notes">
+										<f:fields>
+											<TextArea id = "cNotes" />
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</content>
+			</Panel>
+			<Panel expandable="true" expanded="false" headerText="Item Details">
+				<content>
+					<Table id="itemdet" noDataText="No Items" text="{i18n>TEAM}"
+						items="{ path : '/dataitem'}">
+
+						<headerToolbar>
+							<Toolbar>
+								<ObjectHeader id="ATTR3" title="Item Details" />
+								<ToolbarSpacer></ToolbarSpacer>
+								<Button icon="sap-icon://add" type="Transparent" press="onCreateItem"
+									ariaLabelledBy="editButtonLabel" />
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<core:ExtensionPoint name="opportunitysalesTabColumnExtension"></core:ExtensionPoint>
+							<Column id="salesTeamColumn1" width="15%" />
+							<Column id="salesTeamColumn2" width="15%" />
+						</columns>
+
+						<items>
+							<ColumnListItem type="Navigation" press="handleLineItemPress">
+								<cells>
+									<core:ExtensionPoint name="opportunitySalesTabCellsExtension">
+									</core:ExtensionPoint>
+
+									<ObjectIdentifier id="soItems" title="{Item}"
+										text="{OrderedProd}" />
+									<Text id="itmQty" text="{Quantity}" />
+									<Text text="{unit}" />
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Panel>
+			<Panel expandable="true" expanded="false" headerText="Customer Confirmation">
+				<content>
+					<l:Grid defaultSpan="L12 M12 S12" width="auto">
+						<l:content>
+							<f:SimpleForm id="SimpleFormChange354" minWidth="1024"
+								maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+								title="" labelSpanL="3" labelSpanM="3" emptySpanL="4"
+								emptySpanM="4" columnsL="1" columnsM="1" class="editableForm">
+								<f:content>
+<!-- 									<Label text="Customer Name/Email" />
+									<Input value="{SupplierName}" />
+									<Input value="{HouseNumber}">
+										<layoutData>
+											<l:GridData span="L2 M2 S6" />
+										</layoutData>
+									</Input>
+									<Label text="Customer Sign" />
+									<CheckBox text="" /> -->
+									<mvc:HTMLView id="myHTMLView" viewName="ZSRV_RPA_FSE.view.Signpad" />
+								</f:content>
+							</f:SimpleForm>
+
+							<ObjectHeader id="Conffeedback"></ObjectHeader>
+							<Text text="Dear Customer," />
+							<Text text="Thanks for choosing Global soft solutions." />
+							<Text
+								text="We actively use feedback to constantly improve our delivery and provide you with the best possible service." />
+							<Text
+								text="Based on the past experience this survey will take 5 minutes." />
+							<Text text="Click here to start survey." />
+							<Text
+								text="If you have any questions please contact Jagadess Arumugam on (555) 5555 5555 or at Jagadees.Arumugam@globalsoft-solutions.com" />
+
+
+							<Label id="Q1" />
+							<RadioButtonGroup columns="6" selectedIndex="5"
+								class="sapUiMediumMarginBottom">
+								<buttons>
+									<RadioButton id="Q1-1" />
+									<RadioButton id="Q1-2" />
+									<RadioButton id="Q1-3" />
+									<RadioButton id="Q1-4" />
+									<RadioButton id="Q1-5" visible="false" />
+								</buttons>
+							</RadioButtonGroup>
+
+							<Label id="Q2" />
+							<RadioButtonGroup columns="5" selectedIndex="4"
+								class="sapUiMediumMarginBottom">
+								<buttons>
+									<RadioButton id="Q2-1" />
+									<RadioButton id="Q2-2" />
+									<RadioButton id="Q2-3" />
+									<RadioButton id="Q2-4" visible="false" />
+								</buttons>
+							</RadioButtonGroup>
+
+							<Label id="Q3" />
+							<RadioButtonGroup columns="7" selectedIndex="6"
+								class="sapUiMediumMarginBottom">
+								<buttons>
+									<RadioButton id="Q3-1" />
+									<RadioButton id="Q3-2" />
+									<RadioButton id="Q3-3" />
+									<RadioButton id="Q3-4" />
+									<RadioButton id="Q3-5" />
+									<RadioButton id="Q3-6" visible="false" />
+								</buttons>
+							</RadioButtonGroup>
+
+						</l:content>
+					</l:Grid>
+				</content>
+			</Panel>	
+		</content>
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button text="Create" enabled="{cfg>/actionsEnabled}" press="handleApprove"
+						type="Accept" />
+					<Button text="Cancel" enabled="{cfg>/actionsEnabled}" press="handleReject"
+						type="Reject" />
+				</contentRight>
+
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

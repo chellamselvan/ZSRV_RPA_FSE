@@ -1,0 +1,122 @@
+<core:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m" xmlns:l="sap.ui.layout" xmlns:smartForm="sap.ui.comp.smartform"
+	xmlns:form="sap.ui.layout.form" xmlns:f="sap.ui.layout.form"
+	controllerName="ZSRV_RPA_FSE.view.ConfItems" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page title="Add Item" showNavButton="true" navButtonPress="handleNavButtonPress">
+		<content>
+			<!-- <List id="list" items="{/Data/results}" mode="{device>/listMode}" 
+				select="handleSelect" growing="true" growingScrollToLoad="true"> <items> 
+				<ObjectListItem id="MAIN_LIST_ITEM" type="Active" title="{Description}" number="{ContactPerson}" 
+				numberUnit = "{Telephone}" press="handleSelect"> <attributes> <ObjectAttribute 
+				id="customerName" text="{CustomerName} " /> </attributes> <firstStatus> <ObjectStatus 
+				id="customerCity" text="{City} " /> </firstStatus> </ObjectListItem> </items> 
+				</List> <l:Grid class="gridMarginTop" defaultSpan="L6 M8 S10"> <l:content> 
+				<Label text="Description"> </Label> <Input value=" " description="" width="300px" 
+				/> <Label text="Type" /> <Input value=" " description="" width="300px" fieldWidth="75%" 
+				/> <Label text="Profile" /> <Input value=" " description="" width="300px" 
+				fieldWidth="75%" /> <Label text="Category1" /> <ComboBox> <core:Item key="{ProductId}" 
+				text="{Name}" /> </ComboBox> <Label text="Category2" /> <ComboBox> <core:Item 
+				key="{ProductId}" text="{Name}" /> </ComboBox> <Label text="Category3" /> 
+				<ComboBox> <core:Item key="{ProductId}" text="{Name}" /> </ComboBox> <Label 
+				text="Category4" /> <ComboBox> <core:Item key="{ProductId}" text="{Name}" 
+				/> </ComboBox> </l:content> </l:Grid> -->
+
+			<f:Form id="FormChange354" minWidth="1024" maxContainerCols="2"
+				editable="true">
+				<f:title>
+					<core:Title text="Item Details" />
+				</f:title>
+				<f:layout>
+					<f:ResponsiveGridLayout labelSpanL="3"
+						labelSpanM="3" emptySpanL="4" emptySpanM="4" columnsL="1"
+						columnsM="1" />
+				</f:layout>
+				<f:formContainers>
+					<f:FormContainer>
+						<f:formElements>
+							<f:FormElement label="Product Type">
+								<f:fields>
+									<Select width="100%" id="prdType" selectedKey="{prdType}"
+										change="onSelectPrd">
+										<items>
+											<core:Item text="Material"  />
+											<core:Item text="Service"  />
+										</items>
+									</Select>
+								</f:fields>
+							</f:FormElement>
+							<f:FormElement label="Product Description">
+								<f:fields>
+									<Input id="prddesc" class="sapUiSmallMarginBottom" type="Text"
+										placeholder="Select Product" enabled="true" editable="true"
+										showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleValueHelp"
+										showSuggestion="true" suggestionItems="{ path : '/pData'}">
+										<suggestionItems>
+											<core:Item text="{ProductId}" />
+										</suggestionItems>
+									</Input>
+
+								</f:fields>
+							</f:FormElement>
+						</f:formElements>
+					</f:FormContainer>
+				</f:formContainers>
+			</f:Form>
+			<f:SimpleForm id="SimpleFormChange480" minWidth="1024"
+				maxContainerCols="2" editable="true" layout="ResponsiveGridLayout"
+				title="Details" labelSpanL="4" labelSpanM="4" emptySpanL="0"
+				emptySpanM="0" columnsL="2" columnsM="2" class="editableForm">
+				<f:content>
+					<core:Title text="{selectedItem}" />
+					<Label id="lbqty" text="Quantity" />
+					<Input id="txtqty" value="{model>/input }" />
+					<Label id="lbstrt" text="Actual Start" />
+					<Input id="txtstrt" maxLength="10" value="{ }" type="Date">
+					</Input>
+					<Input id="txttime" value="{ }" type="Time">
+						<layoutData>
+							<l:GridData span="L3 M3 S4" />
+						</layoutData>
+					</Input>
+					<Label id="lblsno" text="Serial Number" />
+					<Input id="txtsno" value="{model>/input}">
+					</Input>
+					<Label id="lbldur" text="Duration" />
+					<Input id="txtdur" value="{ }" />
+					<core:Title text="" />
+					<Label id="lbend" text="Actual End" />
+					<Input id="txtend" maxLength="10" value="{ }" type="Date">
+					</Input>
+					<Input id="txtendtime" value="{ }" type="Time">
+						<layoutData>
+							<l:GridData span="L3 M3 S4" />
+						</layoutData>
+					</Input>
+					<Label text="Units" />
+					<Select width="100%">
+						<items>
+							<core:Item text="EA" />
+							<core:Item text="STD" />
+							<core:Item text="PC" />
+						</items>
+					</Select>
+					<Label text="Note" />
+					<Input value="{Url}" />
+
+				</f:content>
+			</f:SimpleForm>
+		</content>
+
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button text="Add item" enabled="{cfg>/actionsEnabled}"
+						press="handleApprove" type="Accept" />
+					<Button text="Cancel" enabled="{cfg>/actionsEnabled}" press="handleReject"
+						type="Reject" />
+				</contentRight>
+
+			</Bar>
+		</footer>
+	</Page>
+</core:View>

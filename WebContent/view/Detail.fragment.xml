@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<Popover showHeader="false" contentWidth="320px" contentHeight="500px"
+		placement="Auto">
+		<NavContainer id="navCon">
+			<Page id="detail" showNavButton="false" navButtonPress="onNavBack"
+				title="Customer Information">
+				<ObjectHeader id="header" icon="sap-icon://person-placeholder"
+					iconDensityAware="false"
+					iconAlt="{CustomerName}"
+					title="{CustomerName}" >
+				</ObjectHeader>				
+				<ObjectHeader title = "Contact Details">
+														
+					<attributes>																					 
+						<ObjectAttribute id = "ctPhone" text=" Phone : {Telephone}" />
+						<ObjectAttribute text=" Address: " />
+						<ObjectAttribute id = "ctAddr" text="{City} {Region} {PostCode1}" />
+					</attributes>
+				
+				</ObjectHeader>
+				
+				<ObjectHeader title = "Main Contact">														
+					<attributes>						
+					    <ObjectAttribute id = "cpName" text=" Name : {ContactPerson}" />									  
+						<ObjectAttribute id = "cpPhone" text=" Phone : {Telephone}" />
+						<ObjectAttribute text=" Address: " />
+						<ObjectAttribute id = "cpAddr" text="{City} {Region} {PostCode1}" />
+						<ObjectAttribute text=" Email: " />
+						<ObjectAttribute id = "cpemail" text="{EmailId}" />						
+					</attributes>
+				
+				</ObjectHeader>
+			</Page>
+		</NavContainer>
+	</Popover>	
+</core:FragmentDefinition>

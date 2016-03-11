@@ -1,0 +1,177 @@
+
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:form="sap.ui.layout.form"
+	xmlns:l="sap.ui.layout" xmlns:layout="sap.ui.layout" controllerName="ZSRV_RPA_FSE.view.Detail" xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page class="sapUiFioriObjectPage" title="{i18n>DETAIL_TITLE}"
+		showNavButton="{device>/isPhone}" navButtonPress="handleNavButtonPress">
+		<content>
+
+			<ObjectHeader id="header">
+				<!-- <attributes> <ObjectAttribute id="ATTR1" text="{path:'ReqStart' 
+					, formatter: 'ZSRV_RPA_FSE.util.Formatter.dateFormatter'}" /> </attributes> 
+					<firstStatus> <ObjectStatus text="{Description}" /> </firstStatus> -->
+				<attributes>
+					<ObjectAttribute id="Customer" active="true"
+						press="handleCustomer" />
+					<ObjectAttribute id="iBase" title="IBase" />
+					<ObjectAttribute id="iBasedesc" title="IBase Description" />
+				</attributes>
+				<!-- <firstStatus> <layout:VerticalLayout> <ObjectStatus id="reqstdate" 
+					/> </layout:VerticalLayout> </firstStatus> <secondStatus> <ObjectStatus id="reqenddate" 
+					/> </secondStatus> -->
+
+
+				<statuses>
+					<ObjectStatus id="reqstdate" title="Assignment Start Date" />
+					<ObjectStatus id="reqenddate" title="Assignment End Date" />
+					<!-- <ObjectStatus id="cntNo" title = "Contract Number" /> <ObjectStatus 
+						id="cntDesc" title = "Contract Description" /> -->
+					<ObjectStatus id="apptStatus" title="Appointment Status" />
+
+				</statuses>
+
+			</ObjectHeader>
+
+
+
+			<!-- <ObjectHeader icon="sap-icon://person-placeholder" title="{Description}" 
+				number="{NetValue}"> <attributes> <ObjectAttribute id="Customer" text="{Name} 
+				/ {City} {Region} {PostCode1}" active="true" press="handleCustomer" /> </attributes> 
+				</ObjectHeader> -->
+			<Label text="{i18n>DETAIL_TEXT}"></Label>
+			<IconTabBar>
+				<items>
+					<IconTabFilter text="Assignment Details" icon="sap-icon://header">
+						<form:SimpleForm id="AssignmentDetails" minWidth="1024">
+							<core:Title text="Assignment Details" />
+							<Label text="Demand ID / Item" />
+							<Text id="demandItem" />
+							<Label text="Equipment ID" />
+							<Text id="equipId" />
+							<Label text="Equipment Description" />
+							<Text id="equipDesc" />
+							<!-- <Label text="Job Type" /> <Text id="jobType" /> -->
+							<Label text="Purchase Ord No" />
+							<Text text="{PurchaseOrdNo}" />
+							<Label text="Contract Number" />
+							<Text id="cntNo" />
+							<Label text="Contract Description" />
+							<Text id="cntDesc" />
+							<Label text="Contract Start Date" />
+							<Text id="cntstdate" />
+							<Label text="Contract End Date" />
+							<Text id="cntenddate" />
+
+							<!-- <Label text="Notes"/> <Text id="itNotes" /> -->
+							<core:Title text="" />
+							<Label text="Status" />
+							<Select id="soStatus" width="100%">
+								<items>
+									<core:Item key="E0001" text="Open" />
+									<core:Item key="E0002" text="Reached Site" />
+									<core:Item key="E0003" text="Re-schedule" />
+									<core:Item key="E0004" text="Completed" />
+								</items>
+							</Select>
+							<Label text="Notes" />
+							<TextArea id="soNotes" rows="4" />
+							<Label text="" />
+							<Button text="Update" press="handleUpdate" />
+						</form:SimpleForm>
+					</IconTabFilter>
+
+					<!-- <IconTabFilter text = "Item Info" icon="sap-icon://sales-order-item"> 
+						<form:SimpleForm id="ItemDetails" minWidth="1024" > <core:Title text="Item 
+						Info" /> <Label text="Demand Id"/> <Text text="{/Data/ItemDetails/Demandid}" 
+						/> <Label text="Item Number"/> <Text text="{/Data/ItemDetails/Item}" /> <Label 
+						text="Demand Item Number"/> <Text text="{/Data/ItemDetails/DemandidItem}" 
+						/> </form:SimpleForm> </IconTabFilter> -->
+
+					<IconTabFilter text="Notes" icon="sap-icon://notes">
+						<form:SimpleForm id="Notes" minWidth="1024">
+							<core:Title text="Notes" />
+
+							<Text id="itNotes" />
+						</form:SimpleForm>
+					</IconTabFilter>
+
+					<IconTabFilter text="Confirmation" icon="sap-icon://documents">
+						<form:SimpleForm id="ConfDisplay" minWidth="1024">
+							<core:Title text="Confirmation" />
+
+							<Table id="Confirmation1" noDataText="No Confirmation"
+								text="{i18n>TEAM}" items="{ path : '/dataConf'}">
+
+								<headerToolbar>
+									<Toolbar>
+										<ObjectAttribute id="ATTR3" />
+										<ToolbarSpacer></ToolbarSpacer>
+										<Button id="addConf" icon="sap-icon://add" type="Transparent"
+											press="onCreateConf" ariaLabelledBy="editButtonLabel" />
+									</Toolbar>
+								</headerToolbar>
+								<columns>
+									<core:ExtensionPoint name="opportunitysalesTabColumnExtension"></core:ExtensionPoint>
+									<Column id="salesTeamColumn1" width="15%" />
+									<Column id="salesTeamColumn2" width="15%" />
+								</columns>
+
+								<items>
+									<ColumnListItem type="Navigation" press="handleLineItemPress">
+										<cells>
+											<core:ExtensionPoint name="opportunitySalesTabCellsExtension">
+											</core:ExtensionPoint>
+
+											<ObjectIdentifier title="{ObjectId}" text="{Description}" />
+											<Text text="{Status}" />
+										</cells>
+									</ColumnListItem>
+								</items>
+							</Table>
+						</form:SimpleForm>
+					</IconTabFilter>
+
+				<!-- 	<IconTabFilter icon="sap-icon://map">
+						<form:SimpleForm id="mapForm" minWidth="1024">
+						
+						<mvc:HTMLView id="myHTMLView" viewName="ZSRV_RPA_FSE.view.Geolocation" />
+												</form:SimpleForm>
+					</IconTabFilter> -->
+				</items>
+				<content>
+				</content>
+			</IconTabBar>
+			<!-- <l:VerticalLayout width="100%" > <l:content> <Table id="itemCond" 
+				headerText="Items" items="{ path : '/dataCond'}" > <headerToolbar> <Toolbar> 
+				<Label text="Item Condition"></Label> <ToolbarSpacer></ToolbarSpacer> <Button 
+				icon="sap-icon://drop-down-list" press="handleViewSettingsDialogButtonPressed" 
+				/> </Toolbar> </headerToolbar> <infoToolbar> <Toolbar id="vsdFilterBar" active="true" 
+				visible="false" press="[handleViewSettingsDialogFilterBarPressed, views.control.ZSRV_RPA_FSE.view.Detail]"> 
+				<Label id="vsdFilterLabel" text="?" /> </Toolbar> </infoToolbar> <columns> 
+				<Column> <header><Label text="Item Number" /></header> </Column> <Column> 
+				<header><Label text="Condition Value" /></header> </Column> <Column> <header><Label 
+				text="Condition Amount" /></header> </Column> <Column> <header><Label text="Condition 
+				Text" /></header> </Column> </columns> <ColumnListItem type="Navigation" 
+				press="handleLineItemPress" > <cells> <Text id="itemNumber" text="{ItemNo}"></Text> 
+				</cells> <cells> <Text id ="condValue" text="{CondValue}"></Text> </cells> 
+				<cells> <Text id = "condAmount" text="{CondAmount}"></Text> </cells> <cells> 
+				<Text id = "condTxt" text="{CondText}"></Text> </cells> </ColumnListItem> 
+				</Table> </l:content> </l:VerticalLayout> -->
+
+
+		</content>
+
+		<footer>
+			<Bar>
+				<contentRight>
+					<Button text="Accept" enabled="{cfg>/actionsEnabled}" press="handleApprove"
+						type="Accept" />
+					<Button text="Reject" enabled="{cfg>/actionsEnabled}" press="handleReject"
+						type="Reject" />
+					<Button text="Reschedule" enabled="{cfg>/actionsEnabled}"
+						press="handleReschedule" type="Emphasized" />
+					<!-- <Button id="actionButton" icon="sap-icon://action" press="openActionSheet"></Button> -->
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>
